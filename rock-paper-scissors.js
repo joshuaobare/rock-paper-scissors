@@ -1,14 +1,14 @@
 function computerPlay() {
     function getRandomNum(a, b) {
-        return Math.random() * (b - a) + a;   
+        return Math.random() * (b - a) + a;   //Finds random value 
       }
     
-    c=Math.trunc(getRandomNum(1,4));
+    c=Math.trunc(getRandomNum(1,4));          //Truncates random value chosen between 1 and 4
         
     option =""
 
         if (c == 1) {
-            option = "Rock";}
+            option = "Rock";}                  //Computer randomizes between rock, paper, scissors by random selecting 1, 2 or 3
         else if (c == 2) {
             option = "Paper";}
         else if (c == 3) {
@@ -22,10 +22,10 @@ function computerPlay() {
 
 function playRound(playerSelection,computerSelection) {
     computerSelection = computerPlay();
-    playerSelection = prompt("Choose between Rock, Paper and Scissors");
+    playerSelection = prompt("Choose between Rock, Paper and Scissors");    
     decision="";
 
-    switch(playerSelection.toUpperCase()) {
+    switch(playerSelection.toUpperCase()) {                             //switch-case sets the main game logic, .toUpperCase() makes the user's choice case insensitive
         case "ROCK":
             if (computerSelection.toUpperCase() == "ROCK") {
                 decision="Tis a Tie"
@@ -82,7 +82,7 @@ function playRound(playerSelection,computerSelection) {
             console.log(decision);
     
         }
-return decision;
+    return decision;
 }
 
 function game() {
@@ -91,25 +91,25 @@ function game() {
     losses = 0;
 
     for(let i=0 ; i<5 ; i++) {
-        choice=playRound();
-        if (choice == "You Win!") {
+        result=playRound();                                 //for-loop sets a best of 5 game
+        if (result == "You Win!") {
             wins += 1;
         }
 
-        else if (choice == "Tis a Tie") {
+        else if (result == "Tis a Tie") {
             ties += 1;
         }
 
-        else if (choice == "You Lose!") {
+        else if (result == "You Lose!") {
             losses += 1;
         }
-        else if (choice == "Try again") {
+        else if (result == "Try again") {                   //if the user makes an error the round is nullified.
             i--;
         }
     }
 
 if ((ties == 2) && (losses == 2)) {
-    console.log("You Lost To The Computer");
+    console.log("You Lost To The Computer");                //sets various cases to determine the winner of the game.
 }
 if ((wins == 2) && (losses == 1)) {
     console.log("You Beat The Computer");
@@ -124,10 +124,6 @@ if (losses >= 3) {
 if (ties >= 3) {
     console.log("You Tied With The Computer");
 }
-
-
-
-
 }
 
 game();
