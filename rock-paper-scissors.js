@@ -14,60 +14,66 @@ function computerPlay() {
         else if (c == 3) {
             option = "Scissors";}
 
-    console.log(option)
+    
     return option;
         
 }
 
 
-
-d=computerPlay();
-
-function userPlay(playerSelection,computerSelection) {
+function playRound(playerSelection,computerSelection) {
     computerSelection = computerPlay();
     playerSelection = prompt("Choose between Rock, Paper and Scissors");
-    
+    decision="";
 
     switch(playerSelection.toUpperCase()) {
         case "ROCK":
             if (computerSelection.toUpperCase() == "ROCK") {
-                console.log("Tis a Tie");
+                decision="Tis a Tie"
+                console.log(decision);
             }
             
             if (computerSelection.toUpperCase() == "PAPER") {
-                console.log("You Lose!");
+                decision="You Lose!"
+                console.log(decision);
             }
 
             if (computerSelection.toUpperCase() == "SCISSORS") {
-                console.log("You Win!");
+                decision="You Win!"
+                console.log(decision);
             }
             break;
 
         case "PAPER":
             if (computerSelection.toUpperCase() == "ROCK") {
-                console.log("You Win!");
+                decision="You Win!"
+                console.log(decision);
             }
             
             if (computerSelection.toUpperCase() == "PAPER") {
-                console.log("Tis a Tie");
+                decision="Tis a Tie"
+                console.log(decision);
             }
 
             if (computerSelection.toUpperCase() == "SCISSORS") {
-                console.log("You Lose!");
+                decision="You Lose!"
+                console.log(decision);
             }
             break; 
             
         case "SCISSORS":
             if (computerSelection.toUpperCase() == "ROCK") {
-                console.log("You Lose!");
+                decision="You Lose!"
+                console.log(decision);
             }
             
             if (computerSelection.toUpperCase() == "PAPER") {
-                console.log("You Win!");
+                decision="You Win!"
+                console.log(decision);
             }
 
             if (computerSelection.toUpperCase() == "SCISSORS") {
-                console.log("Tis a Tie");
+                decision="Tis a Tie"
+                console.log(decision);
             }
             break;
     
@@ -75,7 +81,37 @@ function userPlay(playerSelection,computerSelection) {
             console.log("Try again");
     
         }
-
+return decision;
 }
 
-userPlay();
+function game() {
+    wins = 0;
+    ties = 0;
+    loses = 0;
+
+    for(let i=0 ; i<5 ; i++) {
+        choice=playRound();
+        if (choice == "You Win") {
+            wins += 1;
+        }
+
+        else if (choice == "Tis a Tie") {
+            ties += 1;
+        }
+
+        else if (choice == "You Lose") {
+            loses += 1;
+        }
+
+    }
+
+if (wins >= 3 ) {
+    console.log("You Beat The Computer");
+}
+
+else if (wins<3) {
+    console.log("You Lost To The Computer");
+}
+}
+
+game();
