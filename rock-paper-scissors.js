@@ -78,7 +78,8 @@ function playRound(playerSelection,computerSelection) {
             break;
     
         default:
-            console.log("Try again");
+            decision="Try again"
+            console.log(decision);
     
         }
 return decision;
@@ -87,11 +88,11 @@ return decision;
 function game() {
     wins = 0;
     ties = 0;
-    loses = 0;
+    losses = 0;
 
     for(let i=0 ; i<5 ; i++) {
         choice=playRound();
-        if (choice == "You Win") {
+        if (choice == "You Win!") {
             wins += 1;
         }
 
@@ -99,19 +100,34 @@ function game() {
             ties += 1;
         }
 
-        else if (choice == "You Lose") {
-            loses += 1;
+        else if (choice == "You Lose!") {
+            losses += 1;
         }
-
+        else if (choice == "Try again") {
+            i--;
+        }
     }
 
+if ((ties == 2) && (losses == 2)) {
+    console.log("You Lost To The Computer");
+}
+if ((wins == 2) && (losses == 1)) {
+    console.log("You Beat The Computer");
+}
 if (wins >= 3 ) {
     console.log("You Beat The Computer");
 }
 
-else if (wins<3) {
+if (losses >= 3) {
     console.log("You Lost To The Computer");
 }
+if (ties >= 3) {
+    console.log("You Tied With The Computer");
+}
+
+
+
+
 }
 
 game();
