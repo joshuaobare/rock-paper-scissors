@@ -1,0 +1,40 @@
+h1 {
+    text-align:center;
+    font-family: monospace;
+    font-size: 50px;
+}
+
+input {
+    text-transform: capitalize;
+}
+
+.bclass {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+#stats {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 50px;
+    margin-bottom: 10px;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: monospace;
+    text-align: center;
+}
+
+
+#results {
+    text-align: center;
+    font-family: monospace;
+}
+
+.fdecision {
+    margin-top: 10px ;
+    font-weight:bolder;
+    text-transform: uppercase;
+    font-size: 20px;
+}

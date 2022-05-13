@@ -1,3 +1,10 @@
+let wins = 0
+let losses = 0
+let ties = 0
+const buttons = document.querySelectorAll('input')
+
+
+
 function computerPlay() {
     function getRandomNum(a, b) {
         return Math.random() * (b - a) + a;   //Finds random value 
@@ -8,122 +15,79 @@ function computerPlay() {
     option =""
 
         if (c == 1) {
-            option = "Rock";}                  //Computer randomizes between rock, paper, scissors by random selecting 1, 2 or 3
+            option = "rock";}                  //Computer randomizes between rock, paper, scissors by random selecting 1, 2 or 3
         else if (c == 2) {
-            option = "Paper";}
+            option = "paper";}
         else if (c == 3) {
-            option = "Scissors";}
+            option = "scissors";}
 
     
     return option;
         
 }
 
+function disableButtons() {
+    buttons.forEach(elem => {
+        elem.disabled = true
+    })}
 
-function playRound(playerSelection,computerSelection) {
-    computerSelection = computerPlay();
-    playerSelection = prompt("Choose between Rock, Paper and Scissors");    
-    decision="";
+function playRound(playerSelection) {
+  
+let computerSelection = computerPlay();
+let decision="";
+let final_decision = "";
 
-    switch(playerSelection.toUpperCase()) {                             //switch-case sets the main game logic, .toUpperCase() makes the user's choice case insensitive
-        case "ROCK":
-            if (computerSelection.toUpperCase() == "ROCK") {
-                decision="Tis a Tie"
-                console.log(decision);
-            }
+    if ((playerSelection == "rock" && computerSelection == "scissors") ||  
+        (playerSelection == "paper" && computerSelection == "rock") ||  
+        (playerSelection == "scissors" && computerSelection == "paper")) {
             
-            if (computerSelection.toUpperCase() == "PAPER") {
-                decision="You Lose!"
-                console.log(decision);
-            }
-
-            if (computerSelection.toUpperCase() == "SCISSORS") {
-                decision="You Win!"
-                console.log(decision);
-            }
-            break;
-
-        case "PAPER":
-            if (computerSelection.toUpperCase() == "ROCK") {
-                decision="You Win!"
-                console.log(decision);
-            }
+            wins += 1
+            decision = "You Win ! " + "<br><br>Player score: " + wins + "<br>Computer score: " + losses + "<br>Ties: " + ties
             
-            if (computerSelection.toUpperCase() == "PAPER") {
-                decision="Tis a Tie"
-                console.log(decision);
-            }
 
-            if (computerSelection.toUpperCase() == "SCISSORS") {
-                decision="You Lose!"
-                console.log(decision);
+            if (wins == 5) {
+                final_decision += "\n\nYou Beat The Computer!"
+                disableButtons()
             }
-            break; 
-            
-        case "SCISSORS":
-            if (computerSelection.toUpperCase() == "ROCK") {
-                decision="You Lose!"
-                console.log(decision);
-            }
-            
-            if (computerSelection.toUpperCase() == "PAPER") {
-                decision="You Win!"
-                console.log(decision);
-            }
-
-            if (computerSelection.toUpperCase() == "SCISSORS") {
-                decision="Tis a Tie"
-                console.log(decision);
-            }
-            break;
+        }
     
-        default:
-            decision="Try again"
-            console.log(decision);
+    else if (playerSelection == computerSelection) {
+            decision = "It's a Tie!" + "<br><br>Player score: " + wins + "<br>Computer score: " + losses + "<br>Ties: " + ties
+            ties+=1
+    }
     
-        }
-    return decision;
-}
+    
+    else { 
+            losses += 1
+            decision ="You Lose !" + "<br><br>Player score: " + wins + "<br>Computer score: " + losses + "<br>Ties: " + ties
+            
 
-function game() {
-    wins = 0;
-    ties = 0;
-    losses = 0;
-
-    for(let i=0 ; i<5 ; i++) {
-        result=playRound();                                 //for-loop sets a best of 5 game
-        if (result == "You Win!") {
-            wins += 1;
-        }
-
-        else if (result == "Tis a Tie") {
-            ties += 1;
-        }
-
-        else if (result == "You Lose!") {
-            losses += 1;
-        }
-        else if (result == "Try again") {                   //if the user makes an error the round is nullified.
-            i--;
-        }
+            if (losses == 5) {
+                final_decision += "\n\nYou Lost To The computer"
+                disableButtons()
+            }
     }
 
-if ((ties == 2) && (losses == 2)) {
-    console.log("You Lost To The Computer");                //sets various cases to determine the winner of the game.
-}
-if ((wins == 2) && (losses == 1)) {
-    console.log("You Beat The Computer");
-}
-if (wins >= 3 ) {
-    console.log("You Beat The Computer");
+    
+
+    document.getElementById('results').innerHTML = decision
+    const f_decision = document.createElement('div')
+    f_decision.classList.add('fdecision')
+    const res = document.querySelector('#results')
+    f_decision.textContent = final_decision
+    res.appendChild(f_decision)
+    
+
+    return 
+
 }
 
-if (losses >= 3) {
-    console.log("You Lost To The Computer");
-}
-if (ties >= 3) {
-    console.log("You Tied With The Computer");
-}
-}
 
-game();
+
+buttons.forEach(button =>{
+    button.addEventListener('click', function(){
+        playRound(button.value)}
+        
+        )})
+
+
